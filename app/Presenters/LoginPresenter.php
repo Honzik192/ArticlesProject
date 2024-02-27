@@ -9,37 +9,30 @@ use Tracy\Debugger;
 
 class LoginPresenter extends Nette\Application\UI\Presenter {
 
-    public function __construct(private Nette\Database\Explorer $database,) {
-    }
+	public function __construct( private Nette\Database\Explorer $database ) {
+	}
 
-    public function createComponentLoginForm() {
-        $form = new Form();
-        $form->addText('login', 'Login:');
-        $form->addText('password', 'Password:');
-        $form->addSubmit('submit', 'Přihlásit');
-        $form->onSuccess[] = $this->loginFormSucceeded(...);
+	public function createComponentLoginForm() {
+		$form = new Form();
+		$form->addText( 'login', 'Login:' );
+		$form->addPassword( 'password', 'Heslo:' );
+		$form->addSubmit( 'submit', 'Přihlásit' );
+		$form->onSuccess[] = $this->loginFormSucceeded( ... );
 
-        return $form;
-    }
+		return $form;
+	}
 
-    public function loginFormSucceeded(Form $form, array $values): void {
-        if ($this->authenticate($values['login'], $values['password'])) {
-            $this->session->getSection('user')->userId = $values['login'];
-            $this->redirect('AddNewArticleForm:show');
-        } else {
-            $form->addError('Nesprávné přihlašovací jméno nebo heslo');
-        }
-    }
+	public function loginFormSucceeded( Nette\Application\UI\Form $form ) {
+		$values = $form->getValues();
 
-    private function authenticate(string $login, string $password): bool {
-        $users = $this->database->table('users')->fetchAll();
-        foreach ($users as $index => $user) {
-            if ($user->login === $login && $user->password === $password) {
-                $this->session->getSection('user')->set('user_id', $user->id);
-                return true;
-            }
-        }
-        return false;
+		try {
+			$this->getUser()->login( $values->login, $values->password );
+			$this->redirect( 'AddNewArticleForm:show' );
 
-    }
+		} catch( Nette\Security\AuthenticationException $e ) {
+			$this->flashMessage( $e->getMessage(), 'danger' );
+		}
+
+	}
+
 }

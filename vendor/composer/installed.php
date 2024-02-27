@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'nette/web-project',
-        'pretty_version' => '1.0.0+no-version-set',
-        'version' => '1.0.0.0',
-        'reference' => NULL,
+        'pretty_version' => 'dev-master',
+        'version' => 'dev-master',
+        'reference' => '8b75ae1f33badc2decb58b481e0be5d8d2639832',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -191,9 +191,9 @@
             'dev_requirement' => false,
         ),
         'nette/web-project' => array(
-            'pretty_version' => '1.0.0+no-version-set',
-            'version' => '1.0.0.0',
-            'reference' => NULL,
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
+            'reference' => '8b75ae1f33badc2decb58b481e0be5d8d2639832',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

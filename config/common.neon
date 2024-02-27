@@ -22,6 +22,6 @@ di:
 
 database:
 	dsn: 'mysql:host=localhost;dbname=articles'
-	user: *root*
-	password: *heslo1234*
+	user: jblaha
+	password: zadesetpiv
 
