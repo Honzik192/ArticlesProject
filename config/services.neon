@@ -8,5 +8,4 @@ search:
 		classes:
 			- *Factory
 			- *Facade
-parameters:
-    imagesFolder: '/var/www/html/images/'
+

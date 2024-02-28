@@ -12,7 +12,6 @@ class Bootstrap {
 		$configurator = new Configurator;
 		$appDir = dirname( __DIR__ );
 
-//		$configurator->setDebugMode(true); // enable for your remote IP
 		$configurator->enableTracy( $appDir . '/log' );
 
 		$configurator->setTempDirectory( $appDir . '/temp' );
@@ -20,12 +19,10 @@ class Bootstrap {
 		$configurator->createRobotLoader()
 			->addDirectory( __DIR__ )
 			->register();
-//        \Tracy\OutputDebugger::enable();
 
 		$configurator->addConfig( $appDir . '/config/common.neon' );
 		$configurator->addConfig( $appDir . '/config/services.neon' );
-
-//		$configurator->addConfig($appDir . '/config/local.neon');
+		$configurator->addConfig($appDir . '/config/local.neon');
 
 		return $configurator;
 	}

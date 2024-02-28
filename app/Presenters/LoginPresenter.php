@@ -4,13 +4,9 @@ namespace App\Presenters;
 
 use Nette;
 use Nette\Application\UI\Form;
-use Tracy\Debugger;
 
 
 class LoginPresenter extends Nette\Application\UI\Presenter {
-
-	public function __construct( private Nette\Database\Explorer $database ) {
-	}
 
 	public function createComponentLoginForm() {
 		$form = new Form();
@@ -27,10 +23,11 @@ class LoginPresenter extends Nette\Application\UI\Presenter {
 
 		try {
 			$this->getUser()->login( $values->login, $values->password );
-			$this->redirect( 'AddNewArticleForm:show' );
+			$this->redirect( 'AddNewArticleForm:default' );
 
 		} catch( Nette\Security\AuthenticationException $e ) {
 			$this->flashMessage( $e->getMessage(), 'danger' );
+            $form->addError('Špatně zadané jméno nebo heslo');
 		}
 
 	}

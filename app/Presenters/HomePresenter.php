@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Presenters;
 
+use App\Constants\Constants;
 use Nette;
 use Ublaboo\DataGrid\DataGrid;
 
@@ -22,14 +23,12 @@ final class HomePresenter extends Nette\Application\UI\Presenter {
         $grid->setDataSource($this->database->table('articles'));
 
         $grid->setItemsPerPageList([20, 50, 100], true);
-
-        $grid->addColumnText('id', 'Id')->setSortable();
-
-        $grid->addColumnText('title', 'Titulek')->setSortable();
-
-        $grid->addColumnText('text', 'Obsah');
-
-        $grid->addColumnDateTime('created_at', 'Vytvořeno')->setFormat('j. n. Y')->setSortable();
+        $grid->addColumnText('id', 'Id');
+        $grid->addColumnText('title', Constants::ARTICLE_TITLE);
+        $grid->addColumnText('text', Constants::CONTENT);
+        $grid->addColumnDateTime('created_at', Constants::CREATED_AT)
+            ->setFormat('j. n. Y')
+            ->setSortable();
 
         return $grid;
     }
